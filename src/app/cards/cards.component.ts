@@ -11,7 +11,7 @@ export class CardsComponent implements OnInit {
 
   public _url: string = "http://apitest.vendosmart.com/vendor_search_v2";
   city_url: string = "http://apitest.vendosmart.com/model/city/"
-  data: any;
+  items: any;
   cities : any;
   selectedCity: any;
 
@@ -26,7 +26,7 @@ export class CardsComponent implements OnInit {
 
     this.http.get(this._url).subscribe((data: any) => {
       // console.log(data);
-      this.data = data.search_results;
+      this.items = data.search_results;
     })
   }
 
