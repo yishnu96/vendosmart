@@ -4,13 +4,19 @@
     <option *ngFor="let city of cities" [value]="city.city_title">{{city.city_title}}</option>
   </select>
 
-  <ngb-rating [(rate)]="selectedRatting" (hover)="hovered=$event" (leave)="hovered=0"></ngb-rating>
-
-  <button (click)="clearFilters()"> Clear </button>
+  <select class="selectpicker" data-live-search="true" (change)="cityRating($event)" id="example">
+    <option [value]=0>Zero</option>
+    <option [value]=1>1</option>
+    <option [value]=2>2</option>
+    <option [value]=3>3</option>
+    <option [value]=4>4</option>
+    <option [value]=5>5</option>
+  </select>
+  <button (click)="search()"> Search </button>
 </div>
 
 
-<div *ngFor="let item of items | search : selectedCity">
+<div *ngFor="let item of items | search : searchFilters">
   <div class="card my-3" style="width: 80%">
     <div class="row">
       <div class="col-md-4">
@@ -18,8 +24,8 @@
           <img src="{{item.logo}}" class="vimg" alt="">
           Verified By SomeOne {{item.verified}}
           {{item.address}}
-          <ngb-rating [rate]="3"></ngb-rating>
-          <div></div>
+          <!-- <ngb-rating [rate]="{{item.rating}} || 0"></ngb-rating> -->
+          <ngb-rating [rate]="2"></ngb-rating>
           Rated {{item.rating_count}} ( {{item.total_orders}} Reviews)
         </div>
       </div>

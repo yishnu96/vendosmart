@@ -14,9 +14,10 @@ export class CardsComponent implements OnInit {
   city_url: string = "http://apitest.vendosmart.com/model/city/"
   items: any;
   cities : any;
-  selectedCity: any;
+  selectedCity: string = '';
   selectedRatting: number= 0;
   hovered: number=0
+  searchFilters: any
 
   constructor(private http: HttpClient,config: NgbRatingConfig) {
     config.max = 5;
@@ -25,23 +26,40 @@ export class CardsComponent implements OnInit {
   ngOnInit() : void {
 
     this.http.get(this.city_url).subscribe((data: any) => {
-      // console.log(data);
       this.cities = data;
     })
 
     this.http.get(this._url).subscribe((data: any) => {
-      // console.log(data);
       this.items = data.search_results;
     })
   }
 
   cityChange(dropdownSelectedCity : any) {
-    console.log(dropdownSelectedCity.target.value);
     this.selectedCity = dropdownSelectedCity.target.value;
+    // this.searchFilters= {
+    //   selectedCity : this.selectedCity,
+    //   selectedRatting : this.selectedRatting
+    // }
+  }
+  cityRating(dropdownSelectedRating : any) {
+    // console.log(dropdownSelectedRating .target.value);
+    this.selectedRatting = dropdownSelectedRating .target.value;
+    // this.searchFilters= {
+    //   selectedRatting : this.selectedRatting,
+    //   selectedCity : this.selectedCity,
+    // }
   }
 
+  search(){
+    console.log(this.selectedRatting);
+
+    this.searchFilters = {
+      selectedRatting : this.selectedRatting,
+      selectedCity : this.selectedCity,
+    }
+  }
   clearFilters() {
-    this.selectedCity = null;
+    this.selectedCity = '';
     this.selectedRatting = 0;
   }
 

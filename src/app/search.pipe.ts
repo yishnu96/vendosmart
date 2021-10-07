@@ -5,19 +5,35 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(items: any[], searchText: string): any[] {
+  transform(items: any[], searchFilters: any): any[] {
+
+    console.log(searchFilters);
     if (!items) {
       return [];
     }
-    if (!searchText) {
+    if (!searchFilters) {
       return items;
     }
 
-    searchText = searchText.toLocaleLowerCase();
+    searchFilters.selectedCity = searchFilters.selectedCity.toLocaleLowerCase();
 
-    return items.filter(it => {
-      return it.city.toLocaleLowerCase().includes(searchText);
-    });
+    if (searchFilters.selectedCity && searchFilters.selectedRatting==0) {
+      return items.filter(it => {
+        return it.city.toLocaleLowerCase().includes(searchFilters.selectedCity);
+      });
+    }
+
+    if (searchFilters.selectedCity ==='' && searchFilters.selectedRatting != 0) {
+      return items.filter(it => it.rating == searchFilters.selectedRatting);
+    }
+
+    if (searchFilters.selectedCity!=='' && searchFilters.selectedRatting!=0) {
+      return items.filter(it => {
+        return it.city.toLocaleLowerCase().includes(searchFilters.selectedCity) &&  it.rating == searchFilters.selectedRatting;
+      });
+    }
+
+    return items;
   }
 
 }
