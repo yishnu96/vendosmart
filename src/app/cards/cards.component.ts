@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cards',
@@ -14,8 +15,12 @@ export class CardsComponent implements OnInit {
   items: any;
   cities : any;
   selectedCity: any;
+  selectedRatting: number= 0;
+  hovered: number=0
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,config: NgbRatingConfig) {
+    config.max = 5;
+   }
 
   ngOnInit() : void {
 

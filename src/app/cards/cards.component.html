@@ -1,11 +1,15 @@
 <div ngbDropdown class="d-inline-block">
-  <select class="fstdropdown-select" (change)="cityChange($event)" id="example">
+  <select class="selectpicker" data-live-search="true" (change)="cityChange($event)" id="example">
     <option *ngFor="let city of cities"  [value]="city.city_title">{{city.city_title}}
     </option>
   </select>
-  <!-- <select class='select-option' #mySelect (change)='onOptionsSelected(mySelect.value)'>
-    <option class='option' *ngFor='let option of dropDownData' [value]="option.seo_val">{{option.text_val}}</option>
-  </select> -->
+
+  <ngb-rating [(rate)]="selectedRatting" (hover)="hovered=$event" (leave)="hovered=0" ></ngb-rating>
+
+  <!-- <div (click)="clearFilter()" >Clear</div> -->
+
+  Selected: <b>{{selectedRatting}}</b>
+Hovered: <b>{{hovered}}</b>
 </div>
 
 
@@ -17,7 +21,8 @@
           <img src="{{item.logo}}" class="vimg" alt="">
           Verified By SomeOne {{item.verified}}
           {{item.address}}
-          Rating icon
+          <ngb-rating [rate]="3"></ngb-rating>
+          <div></div>
           Rated {{item.rating_count}} ( {{item.total_orders}} Reviews)
         </div>
       </div>
