@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class VendorService {
 
   city_url: string = "http://apitest.vendosmart.com/model/city/";
-  _url: string = "http://apitest.vendosmart.com/vendor_search_v2";
+  _url: string = "http://apitest.vendosmart.com/vendor_search";
   constructor(private http: HttpClient) { }
 
   getCity() {

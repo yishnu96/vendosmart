@@ -19,6 +19,7 @@ export class CardsComponent implements OnInit {
 
   constructor(private vendorService: VendorService,config: NgbRatingConfig) {
     config.max = 5;
+    config.readonly = true;
    }
 
   ngOnInit() : void {

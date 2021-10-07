@@ -17,35 +17,62 @@
 
 
 <div *ngFor="let item of items | search : searchFilters">
-  <div class="card my-3" style="width: 80%">
+  <div class="card mx-auto my-3" style="width: 80%">
     <div class="row">
       <div class="col-md-4">
-        <div class="align-self-center mx-3">
-          <img src="{{item.logo}}" class="vimg" alt="">
-          Verified By SomeOne {{item.verified}}
-          {{item.address}}
-          <!-- <ngb-rating [rate]="{{item.rating}} || 0"></ngb-rating> -->
-          <ngb-rating [rate]="2"></ngb-rating>
-          Rated {{item.rating_count}} ( {{item.total_orders}} Reviews)
+        <div class="align-self-center ">
+          <div class="item-log mt-2">
+            <img src="{{item.logo}}" class="vimg" alt="">
+          </div>
+          <div *ngIf="item.verified == 1" class="badge text-white bg-success"> Verified </div>
+          <div *ngIf="item.verified == 0" class="badge text-white bg-danger"> Not Verified </div>
+          <p class="fs-14"> {{item.address}} </p>
+          <ngb-rating [rate]="item.rating || 0"></ngb-rating>
+          <p>  Rated {{item.rating_count}} ( {{item.total_orders}} Reviews) </p>
+
         </div>
       </div>
 
-      <div class="col-md-8">
-        <a href="{{item.website}}">{{item.company_name}} </a>
+      <div class="col-md-8 info-wrap">
+        <a class='company-name' href="{{item.website}}">{{item.company_name}} </a>
+        <div class="tagline"> &quot; {{item.tag_line}} &quot;</div>
+        <hr>
+        <div class="about"> {{item.about_business}} </div>
+        <div class="features-wap">
+          <div class="row ">
+            <div class="col-md-4 features">
+              <h6>Last Delivery</h6>
+              <span> {{item.last_delivery || 'Not Available'}} </span>
+            </div>
+            <div class="col-md-4 features">
+              <h6>Year of Establiment</h6>
+              <span> {{item.start_date | date : 'YYYY' || 'Not Available'}} </span>
+            </div>
+            <div class="col-md-4 features">
+              <h6>Number Of team Members</h6>
+              <span> {{item.no_of_employees || 'Not Available'}} </span>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4 features">
+              <h6>Total Orders</h6>
+              <span> {{item.total_orders || 'Not Available'}} </span>
+            </div>
+            <div class="col-md-4 features">
+              <h6>Location</h6>
+              <span> {{item.city || 'Not Available'}} </span>
+            </div>
+            <div class="col-md-4 features">
+              <h6>Response Rate </h6>
+              <span> {{item.response_time || 'Not Available'}} </span>
+            </div>
+          </div>
+        </div>
 
-        {{item.tag_line}}
-        {{item.about_business}}
-
-        Last Delivery : {{item.last_delivery}}
-        Year of Establiment : {{item.created_at}}
-        Number Of team Members : {{item.no_of_employees}}
-        Total Orders : {{item.total_orders}}
-        <div style="color: red;"> Location : {{item.city}} </div>
-        Response Rate : {{item.response_time}}
-
-        <span *ngFor="let service of item.service_list" class="badge mx-1 rounded-pill bg-primary"> {{service}}</span>
-
-
+        <div class="row">
+          <span *ngFor="let service of item.service_list" class="btn btn-sm btn-outline-primary mx-2 my-1 service">
+            {{service}}</span>
+        </div>
       </div>
     </div>
   </div>
