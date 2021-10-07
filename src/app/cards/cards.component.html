@@ -1,12 +1,12 @@
 <div ngbDropdown class="d-inline-block">
   <select class="selectpicker" data-live-search="true" (change)="cityChange($event)" id="example">
     <option value="">Please select a city</option>
-    <option *ngFor="let city of cities"  [value]="city.city_title">{{city.city_title}}</option>
+    <option *ngFor="let city of cities" [value]="city.city_title">{{city.city_title}}</option>
   </select>
 
-  <ngb-rating [(rate)]="selectedRatting" (hover)="hovered=$event" (leave)="hovered=0" ></ngb-rating>
+  <ngb-rating [(rate)]="selectedRatting" (hover)="hovered=$event" (leave)="hovered=0"></ngb-rating>
 
-    <button (click)="clearFilters()" > Clear </button>
+  <button (click)="clearFilters()"> Clear </button>
 </div>
 
 
@@ -37,9 +37,8 @@
         <div style="color: red;"> Location : {{item.city}} </div>
         Response Rate : {{item.response_time}}
 
-        <ol *ngFor="let service of item.service_list">
-          <li> {{service}} </li>
-        </ol>
+        <span *ngFor="let service of item.service_list" class="badge mx-1 rounded-pill bg-primary"> {{service}}</span>
+
 
       </div>
     </div>
