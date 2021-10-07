@@ -1,0 +1,45 @@
+<div ngbDropdown class="d-inline-block">
+  <select class="fstdropdown-select" (change)="cityChange($event)" id="example">
+    <option *ngFor="let city of cities"  [value]="city.city_title">{{city.city_title}}
+    </option>
+  </select>
+  <!-- <select class='select-option' #mySelect (change)='onOptionsSelected(mySelect.value)'>
+    <option class='option' *ngFor='let option of dropDownData' [value]="option.seo_val">{{option.text_val}}</option>
+  </select> -->
+</div>
+
+
+<div *ngFor="let item of data | search : selectedCity">
+  <div class="card my-3" style="width: 80%">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="align-self-center mx-3">
+          <img src="{{item.logo}}" class="vimg" alt="">
+          Verified By SomeOne {{item.verified}}
+          {{item.address}}
+          Rating icon
+          Rated {{item.rating_count}} ( {{item.total_orders}} Reviews)
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <a href="{{item.website}}">{{item.company_name}} </a>
+
+        {{item.tag_line}}
+        {{item.about_business}}
+
+        Last Delivery : {{item.last_delivery}}
+        Year of Establiment : {{item.created_at}}
+        Number Of team Members : {{item.no_of_employees}}
+        Total Orders : {{item.total_orders}}
+        <div style="color: red;"> Location : {{item.city}} </div>
+        Response Rate : {{item.response_time}}
+
+        <ol *ngFor="let service of item.service_list">
+          <li> {{service}} </li>
+        </ol>
+
+      </div>
+    </div>
+  </div>
+</div>
