@@ -1,15 +1,12 @@
 <div ngbDropdown class="d-inline-block">
   <select class="selectpicker" data-live-search="true" (change)="cityChange($event)" id="example">
-    <option *ngFor="let city of cities"  [value]="city.city_title">{{city.city_title}}
-    </option>
+    <option value="">Please select a city</option>
+    <option *ngFor="let city of cities"  [value]="city.city_title">{{city.city_title}}</option>
   </select>
 
   <ngb-rating [(rate)]="selectedRatting" (hover)="hovered=$event" (leave)="hovered=0" ></ngb-rating>
 
-  <!-- <div (click)="clearFilter()" >Clear</div> -->
-
-  Selected: <b>{{selectedRatting}}</b>
-Hovered: <b>{{hovered}}</b>
+    <button (click)="clearFilters()" > Clear </button>
 </div>
 
 

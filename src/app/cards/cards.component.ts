@@ -40,4 +40,9 @@ export class CardsComponent implements OnInit {
     this.selectedCity = dropdownSelectedCity.target.value;
   }
 
+  clearFilters() {
+    this.selectedCity = null;
+    this.selectedRatting = 0;
+  }
+
 }
