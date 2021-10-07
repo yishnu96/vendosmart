@@ -15,7 +15,9 @@ export class CardsComponent implements OnInit {
   selectedCity: string = '';
   selectedRatting: number= 0;
   hovered: number=0
-  searchFilters: any
+  searchFilters: any;
+  offset: number = 0;
+  pageSize: number = 6;
 
   constructor(private vendorService: VendorService,config: NgbRatingConfig) {
     config.max = 5;

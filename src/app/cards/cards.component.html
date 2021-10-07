@@ -4,7 +4,7 @@
     <option *ngFor="let city of cities" [value]="city.city_title">{{city.city_title}}</option>
   </select>
 
-  <select class="selectpicker" data-live-search="true" (change)="cityRating($event)" id="example">
+  <select class="selectpicker " data-live-search="true" (change)="cityRating($event)" id="example">
     <option [value]=0>Zero</option>
     <option [value]=1>1</option>
     <option [value]=2>2</option>
@@ -12,7 +12,7 @@
     <option [value]=4>4</option>
     <option [value]=5>5</option>
   </select>
-  <button (click)="search()"> Search </button>
+  <button class="btn btn-success"(click)="search()"> Search </button>
 </div>
 
 
@@ -70,8 +70,11 @@
         </div>
 
         <div class="row">
-          <span *ngFor="let service of item.service_list" class="btn btn-sm btn-outline-primary mx-2 my-1 service">
-            {{service}}</span>
+          <div class="col">
+            <span *ngFor="let service of item.service_list" class="btn btn-sm btn-outline-primary mx-2 my-1 service">
+              {{service}}</span>
+            <button class="btn btn-sm btn-success float-right" type="button">Raise RFQ</button>
+          </div>
         </div>
       </div>
     </div>
