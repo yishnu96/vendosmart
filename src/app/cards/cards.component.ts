@@ -17,7 +17,7 @@ export class CardsComponent implements OnInit {
   hovered: number=0
   searchFilters: any;
   offset: number = 0;
-  pageSize: number = 6;
+  pageSize: number = 5;
 
   constructor(private vendorService: VendorService,config: NgbRatingConfig) {
     config.max = 5;
@@ -30,7 +30,14 @@ export class CardsComponent implements OnInit {
       this.cities = data;
     })
 
-    this.vendorService.getData().subscribe((data: any) => {
+    this.getVendorData();
+
+  }
+
+  getVendorData() {
+    this.vendorService.getData(this.offset, this.pageSize).subscribe((data: any) => {
+      console.log(data);
+
       this.items = data.search_results;
     })
   }
@@ -47,6 +54,18 @@ export class CardsComponent implements OnInit {
       selectedRatting : this.selectedRatting,
       selectedCity : this.selectedCity,
     }
+  }
+
+
+  onPrevious() {
+    this.offset = this.offset - this.pageSize -1;
+    this.getVendorData()
+  }
+
+  onNext() {
+    this.offset = this.offset + this.pageSize+1;
+    this.getVendorData()
+
   }
 
   clearFilters() {

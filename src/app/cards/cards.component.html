@@ -1,20 +1,36 @@
-<div ngbDropdown class="d-inline-block">
-  <select class="selectpicker" data-live-search="true" (change)="cityChange($event)" id="example">
-    <option value="">Please select a city</option>
-    <option *ngFor="let city of cities" [value]="city.city_title">{{city.city_title}}</option>
-  </select>
+<!-- <div ngbDropdown class="d-inline-block"> -->
 
-  <select class="selectpicker " data-live-search="true" (change)="cityRating($event)" id="example">
-    <option [value]=0>Zero</option>
-    <option [value]=1>1</option>
-    <option [value]=2>2</option>
-    <option [value]=3>3</option>
-    <option [value]=4>4</option>
-    <option [value]=5>5</option>
-  </select>
-  <button class="btn btn-success"(click)="search()"> Search </button>
+<!-- </div> -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="align-self-center search-pipe">
+      <span class="text-primary fs-14 "> What in your mind ? &nbsp;&nbsp; Find Here : </span>
+      <select class="selectpicker" data-live-search="true" (change)="cityChange($event)" id="example">
+        <option value="">Please select a city</option>
+        <option *ngFor="let city of cities" [value]="city.city_title">{{city.city_title}}</option>
+      </select>
+
+      <select class="selectpicker " data-live-search="true" (change)="cityRating($event)" id="example">
+        <option [value]=0> Zero </option>
+        <option [value]=1> One </option>
+        <option [value]=2> Two</option>
+        <option [value]=3> Three</option>
+        <option [value]=4> Four </option>
+        <option [value]=5> Five </option>
+      </select>
+      <button class="btn btn-success" (click)="search()"> Search </button>
+    </div>
+  </div>
 </div>
 
+<div  *ngIf="!items || items.length == 0" class="row">
+  <div class="col mx-auto">
+    <div class="not-available">
+      <h2> No Data To Show </h2>
+    </div>
+  </div>
+</div>
 
 <div *ngFor="let item of items | search : searchFilters">
   <div class="card mx-auto my-3" style="width: 80%">
@@ -24,11 +40,11 @@
           <div class="item-log mt-2">
             <img src="{{item.logo}}" class="vimg" alt="">
           </div>
-          <div *ngIf="item.verified == 1" class="badge text-white bg-success"> Verified </div>
-          <div *ngIf="item.verified == 0" class="badge text-white bg-danger"> Not Verified </div>
           <p class="fs-14"> {{item.address}} </p>
+          <div *ngIf="item.verified == 1" class="badge text-white bg-success"> Verified </div>
+          <div *ngIf="item.verified == 0" class="badge text-white bg-danger"> Not Verified </div> <br>
           <ngb-rating [rate]="item.rating || 0"></ngb-rating>
-          <p>  Rated {{item.rating_count}} ( {{item.total_orders}} Reviews) </p>
+          <p> Rated {{item.rating_count || 0 }} ( {{item.total_orders || 0}} Reviews) </p>
 
         </div>
       </div>
@@ -40,29 +56,29 @@
         <div class="about"> {{item.about_business}} </div>
         <div class="features-wap">
           <div class="row ">
-            <div class="col-md-4 features">
+            <div class="col-md-4 col-sm-6 features">
               <h6>Last Delivery</h6>
               <span> {{item.last_delivery || 'Not Available'}} </span>
             </div>
-            <div class="col-md-4 features">
+            <div class="col-md-4 col-sm-6 features">
               <h6>Year of Establiment</h6>
               <span> {{item.start_date | date : 'YYYY' || 'Not Available'}} </span>
             </div>
-            <div class="col-md-4 features">
+            <div class="col-md-4 col-sm-6 features">
               <h6>Number Of team Members</h6>
               <span> {{item.no_of_employees || 'Not Available'}} </span>
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-md-4 features">
+            <div class="col-md-4 col-sm-6 features">
               <h6>Total Orders</h6>
               <span> {{item.total_orders || 'Not Available'}} </span>
             </div>
-            <div class="col-md-4 features">
+            <div class="col-md-4 col-sm-6 features">
               <h6>Location</h6>
               <span> {{item.city || 'Not Available'}} </span>
             </div>
-            <div class="col-md-4 features">
+            <div class="col-md-4 col-sm-6 features">
               <h6>Response Rate </h6>
               <span> {{item.response_time || 'Not Available'}} </span>
             </div>
@@ -77,6 +93,15 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="pagination mx-auto">
+      <button (click)="onPrevious()" [disabled]="offset == 0" class="btn btn-success"> Previous </button>
+      <button class="btn btn-success" (click)="onNext()"> Next </button>
     </div>
   </div>
 </div>

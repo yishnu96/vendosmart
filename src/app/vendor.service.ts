@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,10 +11,16 @@ export class VendorService {
   constructor(private http: HttpClient) { }
 
   getCity() {
-    return this.http.get(this.city_url);
+    return this.http.get( this.city_url);
   }
 
-  getData() {
-    return this.http.get(this._url)
+  getData(offset: number, pageSize : number) {
+
+
+    let params = new HttpParams();
+    params.set('offset', offset);
+    params.set('page_size', pageSize);
+
+    return this.http.get(`https://api.vendosmart.com/vendor_search?offset=${offset}&page_size=${pageSize}`)
   }
 }
